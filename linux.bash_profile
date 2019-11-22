@@ -3,7 +3,11 @@
 ###   export LSCOLORS=ExFxBxDxCxegedabagacad
 
 alias ll='ls -lhp --color=auto'                  # Preferred 'ls': -l = long, -h = human (kMG), -p = adds / to folder
-alias openPorts='netstat -tulanp'               # openPorts:    All listening connections
+# use ss or netstat
+alias lsock='sudo ss -tuanp'             # lsock:        Display open sockets
+alias lsockU='sudo ss -uanp'   # lsockU:       Display only open UDP sockets
+alias lsockT='sudo ss -tanp'                    # lsockT:       Display only open TCP sockets
+alias openPorts='sudo ss -tulanp'               # openPorts:    All listening connections
 
 
 ii() {
