@@ -27,10 +27,12 @@ ii() {
 
 
 ## APP Specific
-#Docker usual commands
-alias dls="docker ps -a"                                       #list all containers"
-alias dlog="docker logs $1"                                    #show logs for one running container
-alias dnuke-containers="docker rm -f $(docker ps -aq)"         #stop&remove all running containers
-alias dnuke-images="docker rmi -f $(docker images -aq)"        #delete all docker images
-alias dstats="watch -n1 docker ps"                             #show all runing container         
-alias dprune="docker system prune" 
+if [ -x  /usr/bin/docker ]; then
+    #Docker usual commands
+    alias dls="docker ps -a"                                       #list all containers"
+    alias dlog="docker logs $1"                                    #show logs for one running container
+    alias dnuke-containers="docker rm -f $(docker ps -aq)"         #stop&remove all running containers
+    alias dnuke-images="docker rmi -f $(docker images -aq)"        #delete all docker images
+    alias dstats="watch -n1 docker ps"                             #show all runing container         
+    alias dprune="docker system prune" 
+fi

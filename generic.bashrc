@@ -11,10 +11,15 @@ else
    color_prompt=
 fi
 
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[31m\]$(parse_git_branch)\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
 fi
 export PS1
 
@@ -99,8 +104,10 @@ ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name end
 # export PROXY_HOST='HOST:PORT'
 ## or define it in the private file
 ## ----------------------------------------
+
 alias proxyOn='export http_proxy="$PROXY_HOST" ; export https_proxy="$PROXY_HOST"'
 alias proxyOff='unset http_proxy ; unset https_proxy'
+
 
 ## Info
 alias whatismyip.opendns.com='dig +short myip.opendns.com @resolver1.opendns.com'
